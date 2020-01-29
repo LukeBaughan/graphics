@@ -68,7 +68,7 @@
                 </div>
                 <div class="col-lg-8 align-self-baseline">
                     <p class="text-white-75 font-weight-light mb-5">
-                        C++ // OpenGL 
+                        C++ // OpenGL
                     </p>
                 </div>
             </div>
@@ -88,10 +88,10 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <p align="center" class="text-white-50 mb-4 mt-4">
-                            The game starts with the player on one side of the map, and the enemies on the other. 
-                            The player must kill enemies and control the three capture points in order to earn points. 
+                            The game starts with the player on one side of the map, and the enemies on the other.
+                            The player must kill enemies and control the three capture points in order to earn points.
                             Once either team reaches the point limit, they win the game. <br>
-                            This class checks the distances between the enemy AI and the three capture points, in addition to whether or not the point has been captured. 
+                            This class checks the distances between the enemy AI and the three capture points, in addition to whether or not the point has been captured.
                             It then returns the closest point to the enemy which has not been captured.
                         </p>
                     </div>
@@ -99,7 +99,7 @@
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe class="embed-responsive-item mb-4" width="560" height="315" src="https://www.youtube-nocookie.com/embed/scO3EfyIwu4" frameborder="0"
                                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <iframe class="embed-responsive-item mb-4" width="560" height="315" src="https://www.youtube-nocookie.com/embed/qPKRiTjBojs" frameborder="0" 
+                            <iframe class="embed-responsive-item mb-4" width="560" height="315" src="https://www.youtube-nocookie.com/embed/qPKRiTjBojs" frameborder="0"
                                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
@@ -107,83 +107,84 @@
                 <div class="container mt-4">
                     <pre><code class="language-cpp">
     #include "MeshLoader.h"
-    #include <iostream>
-        #include <fstream>
+    #include &lt;iostream&gt;
+    #include &lt;fstream&gt;
 
-            using namespace std;
+    using namespace std;
 
-            namespace MeshLoader
-            {
-            void LoadVertices(ifstream& inFile, Mesh& mesh)
-            {
+    namespace MeshLoader
+    {
+        void LoadVertices(ifstream& inFile, Mesh& mesh)
+        {
             // Sets mesh.VertexCount to the total number of vertices in the text file
             inFile >> mesh.VertexCount;
 
             if (mesh.VertexCount > 0)
             {
-            mesh.Vertices = new Vertex[mesh.VertexCount];
-            // Adds the vertices in the file to the cube mesh
-            for (int i = 0; i < mesh.VertexCount; i++)
-            {
-            inFile >> mesh.Vertices[i].x;
-            inFile >> mesh.Vertices[i].y;
-            inFile >> mesh.Vertices[i].z;
+                mesh.Vertices = new Vertex[mesh.VertexCount];
+                // Adds the vertices in the file to the cube mesh
+                for (int i = 0; i < mesh.VertexCount; i++)
+                {
+                    inFile >> mesh.Vertices[i].x;
+                    inFile >> mesh.Vertices[i].y;
+                    inFile >> mesh.Vertices[i].z;
+                }
             }
-            }
-            }
+        }
 
-            void LoadTexCoords(ifstream& inFile, TexturedMesh& mesh)
-            {
+        void LoadTexCoords(ifstream& inFile, TexturedMesh& mesh)
+        {
             // Sets mesh.TexCoordCount to the total number of texture co-ordinates in the text file
             inFile >> mesh.TexCoordCount;
 
             if (mesh.TexCoordCount > 0)
             {
-            mesh.TexCoords = new TexCoord[mesh.TexCoordCount];
-            // Adds the co-ordinates in the file to the cube mesh
-            for (int i = 0; i < mesh.TexCoordCount; i++)
-            {
-            inFile >> mesh.TexCoords[i].u;
-            inFile >> mesh.TexCoords[i].v;
+                mesh.TexCoords = new TexCoord[mesh.TexCoordCount];
+                // Adds the co-ordinates in the file to the cube mesh
+                for (int i = 0; i < mesh.TexCoordCount; i++)
+                {
+                    inFile >> mesh.TexCoords[i].u;
+                    inFile >> mesh.TexCoords[i].v;
+                }
             }
-            }
-            }
+        }
 
-            void LoadIndices(ifstream& inFile, Mesh& mesh)
-            {
+        void LoadIndices(ifstream& inFile, Mesh& mesh)
+        {
             // Sets mesh.IndexCount to the total number of indices in the text file
             inFile >> mesh.IndexCount;
 
             if (mesh.IndexCount > 0)
             {
-            mesh.Indices = new GLushort[mesh.IndexCount];
-            // Adds the indices in the file to the cube mesh
-            for (int i = 0; i < mesh.IndexCount; i++)
-            {
-            inFile >> mesh.Indices[i];
+                mesh.Indices = new GLushort[mesh.IndexCount];
+                // Adds the indices in the file to the cube mesh
+                for (int i = 0; i < mesh.IndexCount; i++)
+                {
+                    inFile >> mesh.Indices[i];
+                }
             }
-            }
-            }
+        }
 
-            void LoadNormals(ifstream& inFile, Mesh& mesh) {
+        void LoadNormals(ifstream& inFile, Mesh& mesh) 
+        {
             // Sets mesh.NormalCount to the total number of normals in the text file
             inFile >> mesh.NormalCount;
 
             if (mesh.NormalCount > 0)
             {
-            mesh.Normals = new Vector3[mesh.NormalCount];
-            // Adds the normals in the file to the cube mesh
-            for (int i = 0; i < mesh.NormalCount; i++)
-            {
-            inFile >> mesh.Normals[i].x;
-            inFile >> mesh.Normals[i].y;
-            inFile >> mesh.Normals[i].z;
+                mesh.Normals = new Vector3[mesh.NormalCount];
+                // Adds the normals in the file to the cube mesh
+                for (int i = 0; i < mesh.NormalCount; i++)
+                {
+                    inFile >> mesh.Normals[i].x;
+                    inFile >> mesh.Normals[i].y;
+                    inFile >> mesh.Normals[i].z;
+                }
             }
-            }
-            }
+        }
 
-            TexturedMesh* MeshLoader::LoadTextured(char* path)
-            {
+        TexturedMesh* MeshLoader::LoadTextured(char* path)
+        {
             // Creates a new mesh for the cube data to be loaded to
             TexturedMesh* mesh = new TexturedMesh();
             mesh->Mesh = new Mesh();
@@ -194,8 +195,8 @@
 
             if (!inFile.good())
             {
-            cerr << "Can't open texture file " << path << endl;
-            return nullptr;
+                cerr << "Can't open texture file " << path << endl;
+                return nullptr;
             }
             // Performs all of the necessary load functions
             LoadVertices(inFile, *mesh->Mesh);
@@ -206,8 +207,8 @@
             inFile.close();
 
             return mesh;
-            }
-            }
+        }
+    }
 </code>
                 </pre>
                 </div>

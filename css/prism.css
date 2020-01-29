@@ -215,7 +215,7 @@ pre[class*="language-"].line-numbers > code {
 			text-align: right;
 		}
 
-.token.tab:not(:empty),
+/*.token.tab:not(:empty),
 .token.cr,
 .token.lf,
 .token.space {
@@ -252,7 +252,7 @@ pre[class*="language-"].line-numbers > code {
 
 .token a {
 	color: inherit;
-}
+}*/
 code[class*="language-"] a[href],
 pre[class*="language-"] a[href] {
 	cursor: help;
