@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="noto-6">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>First Person Shooter</title>
+
+    <!-- Font Awesome Icons -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <!-- Plugin CSS -->
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Theme CSS - Includes Bootstrap -->
+    <link href="css/creative.min.css" rel="stylesheet">
+
+    <!-- LinkedIn Profile Badge -->
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+
+    <!-- Prism -->
+    <link href="css/prism.css" rel="stylesheet" />
+
+</head>
+
+<body id="page-top">
+
+    <script src="js/prism.js"></script>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">Graphics With OpenGL</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#description">MeshLoader Class</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#contact">Contact Information</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Masthead -->
+    <header class="masthead">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center justify-content-center text-center">
+                <div class="col-lg-10 align-self-end">
+                    <h1 class="text-uppercase text-white font-weight-bold">Graphics With OpenGL</h1>
+                    <hr class="divider my-4">
+                </div>
+                <div class="col-lg-8 align-self-baseline">
+                    <p class="text-white-75 font-weight-light mb-5">
+                        C++ // OpenGL 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="page-section bg-primary" id="description">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="text-white mt-0">MeshLoader</h2>
+                    <hr class="divider light my-4">
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <p align="center" class="text-white-50 mb-4 mt-4">
+                            The game starts with the player on one side of the map, and the enemies on the other. 
+                            The player must kill enemies and control the three capture points in order to earn points. 
+                            Once either team reaches the point limit, they win the game. <br>
+                            This class checks the distances between the enemy AI and the three capture points, in addition to whether or not the point has been captured. 
+                            It then returns the closest point to the enemy which has not been captured.
+                        </p>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item mb-4" width="560" height="315" src="https://www.youtube-nocookie.com/embed/scO3EfyIwu4" frameborder="0" 
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="container mt-4">
+                    <pre><code class="language-cpp">
+    #include "MeshLoader.h"
+    #include <iostream>
+        #include <fstream>
+
+            using namespace std;
+
+            namespace MeshLoader
+            {
+            void LoadVertices(ifstream& inFile, Mesh& mesh)
+            {
+            // Sets mesh.VertexCount to the total number of vertices in the text file
+            inFile >> mesh.VertexCount;
+
+            if (mesh.VertexCount > 0)
+            {
+            mesh.Vertices = new Vertex[mesh.VertexCount];
+            // Adds the vertices in the file to the cube mesh
+            for (int i = 0; i < mesh.VertexCount; i++)
+            {
+            inFile >> mesh.Vertices[i].x;
+            inFile >> mesh.Vertices[i].y;
+            inFile >> mesh.Vertices[i].z;
+            }
+            }
+            }
+
+            void LoadTexCoords(ifstream& inFile, TexturedMesh& mesh)
+            {
+            // Sets mesh.TexCoordCount to the total number of texture co-ordinates in the text file
+            inFile >> mesh.TexCoordCount;
+
+            if (mesh.TexCoordCount > 0)
+            {
+            mesh.TexCoords = new TexCoord[mesh.TexCoordCount];
+            // Adds the co-ordinates in the file to the cube mesh
+            for (int i = 0; i < mesh.TexCoordCount; i++)
+            {
+            inFile >> mesh.TexCoords[i].u;
+            inFile >> mesh.TexCoords[i].v;
+            }
+            }
+            }
+
+            void LoadIndices(ifstream& inFile, Mesh& mesh)
+            {
+            // Sets mesh.IndexCount to the total number of indices in the text file
+            inFile >> mesh.IndexCount;
+
+            if (mesh.IndexCount > 0)
+            {
+            mesh.Indices = new GLushort[mesh.IndexCount];
+            // Adds the indices in the file to the cube mesh
+            for (int i = 0; i < mesh.IndexCount; i++)
+            {
+            inFile >> mesh.Indices[i];
+            }
+            }
+            }
+
+            void LoadNormals(ifstream& inFile, Mesh& mesh) {
+            // Sets mesh.NormalCount to the total number of normals in the text file
+            inFile >> mesh.NormalCount;
+
+            if (mesh.NormalCount > 0)
+            {
+            mesh.Normals = new Vector3[mesh.NormalCount];
+            // Adds the normals in the file to the cube mesh
+            for (int i = 0; i < mesh.NormalCount; i++)
+            {
+            inFile >> mesh.Normals[i].x;
+            inFile >> mesh.Normals[i].y;
+            inFile >> mesh.Normals[i].z;
+            }
+            }
+            }
+
+            TexturedMesh* MeshLoader::LoadTextured(char* path)
+            {
+            // Creates a new mesh for the cube data to be loaded to
+            TexturedMesh* mesh = new TexturedMesh();
+            mesh->Mesh = new Mesh();
+
+            // Opens the text file containing the cube data
+            ifstream inFile;
+            inFile.open(path);
+
+            if (!inFile.good())
+            {
+            cerr << "Can't open texture file " << path << endl;
+            return nullptr;
+            }
+            // Performs all of the necessary load functions
+            LoadVertices(inFile, *mesh->Mesh);
+            LoadTexCoords(inFile, *mesh);
+            LoadNormals(inFile, *mesh->Mesh);
+            LoadIndices(inFile, *mesh->Mesh);
+            // Closes the file when it is no longer needed
+            inFile.close();
+
+            return mesh;
+            }
+            }
+</code>
+                </pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Contact Section -->
+    <section class="page-section" id="contact">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="mt-0">Get In Touch</h2>
+                    <hr class="divider my-4">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mr-auto text-center">
+                    <i class="fab fa-github fa-3x mb-3 text-muted"></i>
+                    <!-- Make sure to change the email address in anchor text AND the link below! -->
+                    <a class="d-block" href="https://github.com/LukeBaughan">GitHub Profile</a>
+                </div>
+                <div class="col-lg-6 mr-auto text-center">
+                    <div class="LI-profile-badge" data-version="v1" data-size="large" data-locale="en_US" data-type="horizontal" data-theme="light" data-vanity="luke-baughan"><a class="LI-simple-link" href='https://uk.linkedin.com/in/luke-baughan?trk=profile-badge'>Luke Baughan</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-light py-5">
+        <div class="container">
+            <div class="small text-center text-muted">Copyright &copy; 2020 - Luke Baughan </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/creative.min.js"></script>
+
+</body>
+
+</html>
